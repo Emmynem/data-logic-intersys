@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Data-Logic Intersys QR Code Event System">
+  	<meta name="keywords" content="Data, Events, QR Code, CNCF, Rivers, State">
+  	<meta name="author" content="Data-Logic Intersys">
+    <title ng-bind="pageTitle"></title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/css/modal.css" rel="stylesheet">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            <div class="card col-lg-8 mx-auto">
+              <div class="card-body ">
+                <div class="mb-2 text-center" ng-if="loadingStatus">
+                  <div class="spinner-grow spinner-grow-lg text-primary mr-2 "style="width:6rem;height:6rem" role="status">
+                    <span class="sr-only">Loading blue...</span>
+                  </div>
+                </div>
+
+                <h3 class="card-title text-left mb-3" ng-show="loadingStatus == undefined && categoryStatus == undefined">{{category.category}} - Sign up</h3>
+                <form class="forms-sample" name="signupForm" ng-show="loadingStatus == undefined && categoryStatus == undefined" novalidate>
+                  <div class="row form-group">
+                    <div class="col-12">
+                      <label for="" class=" form-control-label">Upload Selfie Image</label><br><span class="text-primary ml-2">*Please wait after upload for compression to complete</span><br>
+                    </div>
+                    <div class="col-lg-6 mt-2">
+                      <input class="mb-3" ng-model="form.image" type="file"  accept="image/*" onchange="angular.element(this).scope().uploadedFile(this)">
+                      <br>
+                      <img ng-src="{{image_source}}" class="img-fluid rounded center" style="width: 100%; height: auto;">
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-lg-4 mt-2">
+                      <label for="firstname" class=" form-control-label">Firstname</label>
+                      <input type="text" ng-model="user.firstname" name="firstname" ng-disabled="shouldIShow" ng-required="true" ng-minlength = "3" ng-maxlength = "50" class="form-control p_input">
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.firstname.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Enter Firstname </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.firstname.$error.minlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Minimum length is 3 characters </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.firstname.$error.maxlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Maximum length reached </p></div>
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <label for="middlename" class=" form-control-label">Middlename</label>
+                      <input type="text" ng-model="user.middlename" name="middlename" ng-disabled="shouldIShow" ng-required="false" ng-minlength = "3" ng-maxlength = "50" class="form-control p_input">
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.middlename.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Enter Middlename </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.middlename.$error.minlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Minimum length is 3 characters </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.middlename.$error.maxlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Maximum length reached </p></div>
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <label for="lastname" class=" form-control-label">Lastname</label>
+                      <input type="text" ng-model="user.lastname" name="lastname" ng-disabled="shouldIShow" ng-required="true" ng-minlength = "3" ng-maxlength = "50" class="form-control p_input">
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.lastname.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Enter Lastname </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.lastname.$error.minlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Minimum length is 3 characters </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.lastname.$error.maxlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Maximum length reached </p></div>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-12 col-md-12">
+                      <label for="email" class=" form-control-label">Email</label>
+                      <input type="email" name="email" ng-model="user.email" ng-disabled="shouldIShow" ng-required="true" ng-minlength = "3" ng-maxlength = "149" ng-pattern="/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/" placeholder="e.g. example@domain.com" class="form-control p_input">
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.email.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Enter Email </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.email.$error.pattern && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Valid Email Addresses Only </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.email.$error.minlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Minimum length is 3 characters </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.email.$error.maxlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Maximum length reached </p></div>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-lg-6 mt-2">
+                      <label for="" class=" form-control-label">Gender</label>
+                      <select name="gender" ng-model="user.gender" ng-disabled="shouldIShow" ng-required="true" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <!-- <option value="Others">Others</option> -->
+                      </select>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.gender.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Select Gender </p></div>
+                    </div>
+                    <div class="col-lg-6 mt-2">
+                      <label for="phone" class=" form-control-label">Phone Number</label>
+                      <input type="text" ng-model="user.phone_number" name="phone_number" ng-disabled="shouldIShow" ng-required="true" ng-pattern="/^(?:\+(?:[0-9]●?){6,14}[0-9])|([0][7-9][0-1][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$/" class="form-control">
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.phone_number.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Enter Phone Number </p></div>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.phone_number.$error.pattern && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Phone Numbers With Country Codes Only </p></div>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-lg-4 mt-2">
+                      <label for="" class=" form-control-label">Nation</label>
+                      <select name="nation" ng-model="user.nation" ng-change="change_state(user.nation)" ng-disabled="shouldIShow" ng-required="true" class="form-control">
+                        <option value="" disabled selected>--Select Nation--</option>
+                        <option ng-repeat="nation in nations" value="{{nation}}">{{nation}}</option>
+                      </select>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.nation.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Select Nation </p></div>
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <label for="" class=" form-control-label">State</label>
+                      <select name="state" ng-model="user.state" ng-change="change_area(user.state);change_state_id(user.state);" ng-disabled="shouldIShow" ng-required="true" class="form-control">
+                        <option value="" disabled selected>--Select State--</option>
+                        <option ng-repeat="state in states" value="{{state}}">{{state}}</option>
+                      </select>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.state.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Select State </p></div>
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <label for="" class=" form-control-label">Area</label>
+                      <select name="area" ng-model="user.area" ng-change="change_zone(user.area)" ng-disabled="shouldIShow" ng-required="true" class="form-control">
+                        <option value="" disabled selected>--Select Area--</option>
+                        <option ng-repeat="area in areas" value="{{area}}">{{area}}</option>
+                      </select>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.area.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Select Area </p></div>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-lg-4 mt-2">
+                      <label for="" class=" form-control-label">Zone</label>
+                      <select name="zone" ng-model="user.zone" ng-change="change_choir(user.zone)" ng-disabled="shouldIShow" ng-required="true" class="form-control">
+                        <option value="" disabled selected>--Select Zone--</option>
+                        <option ng-repeat="zone in zones" value="{{zone}}">{{zone}}</option>
+                      </select>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.zone.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Select Zone </p></div>
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <label for="" class=" form-control-label">Choir</label>
+                      <select name="choir" ng-model="user.choir" ng-disabled="shouldIShow" ng-required="true" class="form-control">
+                        <option value="" disabled selected>--Select Choir--</option>
+                        <option ng-repeat="choir in choirs" value="{{choir}}">{{choir}}</option>
+                      </select>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.choir.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Select Choir </p></div>
+                    </div>
+                    <div class="col-lg-4 mt-2">
+                      <label for="" class=" form-control-label">Part</label>
+                      <select name="part" ng-model="user.part" ng-disabled="shouldIShow" ng-required="true" class="form-control">
+                        <option value="" disabled selected>--Select Part--</option>
+                        <option value="Treble">Treble</option>
+                        <option value="Alto">Alto</option>
+                        <option value="Tenor">Tenor</option>
+                        <option value="Bass">Bass</option>
+                      </select>
+                      <div class="d-flex flex-row align-items-center" ng-if="signupForm.part.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Select Singing Part </p></div>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <p class="text-success" ng-if="showSuccessStatus">{{actionStatus}}</p>
+                    <p class="text-danger" ng-if="showStatus">{{actionStatus}}</p>
+                    <p class="text-success" ng-if="successFileUpload">{{fileUploadStatusSuccess}}</p>
+                    <p class="text-danger" ng-if="errorFileUpload">{{fileUploadStatusError}}</p>
+                  </div>
+
+                  <div class="text-center">
+                    <div class="rounded progress-bar input-lg progress-bar-striped progress-bar-animated mt-3" ng-show="showProgress && progressCounter != '100.00%'" role="progressbar" aria-valuenow="{{progressBar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressCounter}};">
+	        			      {{progressCounter}}
+	        			    </div>
+	                  <div class="rounded progress-bar input-lg progress-bar-striped progress-bar-animated mt-3" ng-show="progressCounter == '100.00%' && successFileUpload != true" role="progressbar" aria-valuenow="{{progressBar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressCounter}};">
+	        			      Compressing, please wait ...
+	        			    </div>
+	                  <div class="rounded progress-bar input-lg progress-bar-success progress-bar-animated mt-3" ng-show="successFileUpload" role="progressbar" aria-valuenow="{{progressBar}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressCounter}};">
+	        			      Completed
+	        			    </div>
+                  </div>
+
+                  <div class="text-center mt-2" ng-if="shouldIShow == false || shouldIShow == undefined">
+                    <button type="submit" ng-click="signupForm.$valid && signUp()" class="btn btn-primary btn-block enter-btn">Signup</button>
+                  </div>
+
+                  <div class="row form-group mt-2" ng-if="shouldIShow">
+                    <form name="complete_action_form" novalidate>
+                      <label class="form-control-label col-12">Are you sure you want to complete this action ?</label>
+                      <div class="col-6 col-sm-6">
+                        <button type="button" ng-click="continue_action()" ng-disabled="clickOnce" class="btn btn-success btn-block">
+                          Yes <i class="fa fa-check"></i>
+                        </button>
+                      </div>
+                      <div class="col-6 col-sm-6">
+                        <button type="button" ng-click="removeConfirmModal()" class="btn btn-danger btn-block close-modal">
+                          No <i class="fa fa-times"></i>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                </form>
+
+                <br ng-show="loadingStatus == undefined && categoryStatus != undefined">
+                <h1 class="text-center text-white mb-3" ng-show="loadingStatus == undefined && categoryStatus != undefined">Page not found</h1>
+                <br ng-show="loadingStatus == undefined && categoryStatus != undefined">
+                <h2 class="card-title text-center text-white mb-3" ng-show="loadingStatus == undefined && categoryStatus != undefined">
+                  <a ng-href="/" class="forgot-pass">Go home</a>
+                </h2>
+
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+        </div>
+        <!-- row ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="js/app-1.js"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>

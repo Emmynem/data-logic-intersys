@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Security-Policy" content="child-src *;">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet">
+</head>
+<body>
+
+	<section class="oa-email" style="font-family: \'Syne\', \'Trebuchet MS\', sans-serif; padding: 15px 0; max-width: 600px; width: 95%; font-size: 100%; margin: 30px auto; -moz-box-shadow: 1px 1px 5px 1px #e3e3e3; -webkit-box-shadow: 1px 1px 5px 1px #e3e3e3; box-shadow: 1px 1px 5px 1px #e3e3e3;">
+		<div class="xnyder-brand xui-row xui-align-items-center" style="justify-content: center;">
+			<div class="logo" style="width: 100%;">
+
+			</div>
+			<div class="name" style="text-align: center; width: 100%; marging-top: 20px;">
+				<span></span>
+			</div>
+		</div>
+		<div class="oa-email-header" style="background-color: #f0124e; color: #fff; padding: 30px 10px 15px 10px; text-align: center;">
+			<h2 style="font-weight: normal;" class="xui-text-capitalize">Intersys Notification</h2>
+		</div>
+		<div class="oa-email-dtls" style="padding: 30px 20px; color: #555; position: relative;">
+			<h2>Hi '.$fullname.',</h2>
+			<p>'.$the_message.'</p>
+      <img class="" style="min-width: 100%;" src="https://api.qrserver.com/v1/create-qr-code/?size=100%x100&data=https://www.intersys.toonlogicstudio.com/" alt="{{categoryPerson.code}} - QR Code">
+			<br>
+			<p>Sincerely, <br> <span class="xui-text-blue"> <a href="https://www.intersys.toonlogicstudio.com/" style="text-decoration: none;">Data-Logic Intersys</a></span></p>
+
+      <p>Copyright © <script type="text/javascript">document.write(new Date().getFullYear());</script> <a target="_blank" href="https://www.intersys.toonlogicstudio.com/">Data-Logic Intersys</a>. All rights reserved.</p>
+		</div>
+	</section>
+
+</body>
+</html>

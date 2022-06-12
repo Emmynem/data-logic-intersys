@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Data-Logic Intersys QR Code Event System">
+  	<meta name="keywords" content="Data, Events, QR Code, CNCF, Rivers, State">
+  	<meta name="author" content="Data-Logic Intersys">
+    <title ng-bind="pageTitle"></title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/css/modal.css" rel="stylesheet">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div class="content-wrapper full-page-wrapper d-flex align-items-center auth main">
+            <div class="card col-lg-7 mx-auto">
+              <div class="card-body ">
+                <div class="" ng-if="loadingStatus">
+                  <div class="mb-2 text-center">
+                    <div class="spinner-grow spinner-grow-lg text-primary mr-2 "style="width:6rem;height:6rem" role="status">
+                      <span class="sr-only">Loading blue...</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="" ng-show="loadingStatus == undefined && categoryPersonStatus == undefined">
+                  <div class="row">
+    								<div class="col-md-5 text-center">
+    									<div class="card">
+                        <img class="card-img-top" style="min-width: 100%; object-fit: cover; max-height: 350px;" ng-src="{{categoryPerson.image}}" alt="{{fullname}} - Image">
+    									</div>
+    								</div>
+    								<div class="col-md-2 text-center">
+    									<!-- <div class="card bg-light py-2 py-md-3 border">
+    										<div class="card-body">
+    											.col-md-6
+    										</div>
+    									</div> -->
+    								</div>
+    								<div class="col-md-5 text-center">
+    									<div class="card">
+    										<img class="card-img-top" style="min-width: 100%; object-fit: cover; max-height: 350px;" ng-src="https://api.qrserver.com/v1/create-qr-code/?size=100x350&data={{qr_code}}" alt="{{categoryPerson.code}} - QR Code">
+    									</div>
+    								</div>
+    							</div>
+                  <br>
+                  <div class="row">
+    								<div class="col-md-5 text-center">
+    									<div class="">
+                        <h5 class="text-left text-white mb-3">{{categoryPerson.firstname + (categoryPerson.middlename != null ? " " + categoryPerson.middlename + " " : " ") + categoryPerson.lastname}}</h5>
+                        <h5 class="text-left text-white mb-3">{{categoryPerson.email}}</h5>
+                        <h5 class="text-left text-white mb-3">{{categoryPerson.phone_number}}</h5>
+                        <h5 class="text-left text-white mb-3">{{categoryPerson.gender}}</h5>
+    									</div>
+    								</div>
+    								<div class="col-md-2 text-center">
+    									<!-- <div class="card bg-light py-2 py-md-3 border">
+    										<div class="card-body">
+    											.col-md-6
+    										</div>
+    									</div> -->
+    								</div>
+    								<div class="col-md-5 text-center">
+    									<div class="">
+    										<h5 class="text-right text-white mb-3">{{categoryPerson.category}}</h5>
+                        <h5 class="text-right text-white mb-3">{{categoryPerson.code}}</h5>
+                        <h5 class="text-right text-white mb-3">{{categoryPerson.serial_number}}</h5>
+                        <h5 class="text-right text-white mb-3">{{categoryPerson.part}}</h5>
+    									</div>
+    								</div>
+    							</div>
+                  <h5 class="text-left text-white mb-3">Choir : {{categoryPerson.choir}}</h5>
+                  <h5 class="text-left text-white mb-3">Zone : {{categoryPerson.zone}}</h5>
+                  <h5 class="text-left text-white mb-3">Area : {{categoryPerson.area}}</h5>
+                  <h5 class="text-left text-white mb-3">State : {{categoryPerson.state}}</h5>
+                  <h5 class="text-left text-white mb-3">Nation : {{categoryPerson.nation}}</h5>
+                  <br>
+                  <div class="row">
+                    <div class="col-12" ng-if="(main_role == 1 || main_role == 2 || main_role == 4) && categoryPerson.authenticated == 0">
+                      <button title="Authenticate" ng-if="shouldIShow == false || shouldIShow == undefined" ng-click="authenticate_user(categoryPerson.uuid, categoryPerson.category_uuid, categoryPerson.category, categoryPerson.firstname, categoryPerson.middlename, categoryPerson.lastname, categoryPerson.email, categoryPerson.phone_number, categoryPerson.serial_number, categoryPerson.code)" class="btn btn-outline-success btn-block"><i class="fa fa-check"></i></button>
+                      <center>
+                        <div class="row form-group btn-block mt-2" ng-if="shouldIShow">
+                          <form name="complete_action_form" novalidate>
+                            <label class="form-control-label col-12">Are you sure you want to complete this action ?</label>
+                            <div class="row">
+                              <div class="col-6 col-sm-6">
+                                <button type="button" ng-click="continue_action()" ng-disabled="clickOnce" class="btn btn-success btn-block">
+                                  Yes <i class="fa fa-check"></i>
+                                </button>
+                              </div>
+                              <div class="col-6 col-sm-6">
+                                <button type="button" ng-click="removeConfirmModal()" class="btn btn-danger btn-block close-modal">
+                                  No <i class="fa fa-times"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                          <div class="text-center mt-3">
+                            <p class="text-success" ng-if="showSuccessStatus">{{showSuccessStatus}}</p>
+                            <p class="text-danger" ng-if="showStatus">{{showStatus}}</p>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                    <div class="col-12" ng-if="(main_role == 1 || main_role == 2 || main_role == 4) && categoryPerson.authenticated == 1">
+                      <button title="Unauthenticate" ng-if="shouldIShow == false || shouldIShow == undefined" ng-click="unauthenticate_user(categoryPerson.uuid, categoryPerson.category_uuid, categoryPerson.category, categoryPerson.firstname, categoryPerson.middlename, categoryPerson.lastname, categoryPerson.email, categoryPerson.phone_number, categoryPerson.serial_number, categoryPerson.code)" class="btn btn-outline-danger btn-block"><i class="fa fa-times"></i></button>
+                      <center>
+                        <div class="row form-group btn-block mt-2" ng-if="shouldIShow">
+                          <form name="complete_action_form" novalidate>
+                            <label class="form-control-label col-12">Are you sure you want to complete this action ?</label>
+                            <div class="row">
+                              <div class="col-6 col-sm-6">
+                                <button type="button" ng-click="continue_action()" ng-disabled="clickOnce" class="btn btn-success btn-block">
+                                  Yes <i class="fa fa-check"></i>
+                                </button>
+                              </div>
+                              <div class="col-6 col-sm-6">
+                                <button type="button" ng-click="removeConfirmModal()" class="btn btn-danger btn-block close-modal">
+                                  No <i class="fa fa-times"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                          <div class="text-center mt-3">
+                            <p class="text-success" ng-if="showSuccessStatus">{{showSuccessStatus}}</p>
+                            <p class="text-danger" ng-if="showStatus">{{showStatus}}</p>
+                          </div>
+                        </div>
+                      </center>
+                    </div>
+                    <div class="col-lg-12 mt-3" ng-if="main_role == null">
+                      <div class="text-center">
+                        <p class="text-danger">Login to authenticate user</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 mt-3" ng-if="main_role != null  && categoryPerson.authenticated == 1">
+                      <div class="text-center">
+                        <p class="text-success">User authenticated !</p>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 mt-3" ng-if="main_role != null  && categoryPerson.authenticated == 0">
+                      <div class="text-center">
+                        <p class="text-danger">User unauthenticated !</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="" ng-show="loadingStatus == undefined && categoryPersonStatus != undefined">
+                  <br>
+                  <h3 class="text-center text-white mb-3">{{categoryPersonStatus}}</h3>
+                  <br>
+                  <h2 class="card-title text-center text-white mb-3">
+                    <a ng-href="/" class="forgot-pass">Go home</a>
+                  </h2>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+        </div>
+        <!-- row ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="js/app-1.js"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>
