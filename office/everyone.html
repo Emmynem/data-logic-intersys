@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Data-Logic Intersys QR Code Event System">
+	<meta name="keywords" content="Data, Events, QR Code, CNCF, Rivers, State">
+	<meta name="author" content="Data-Logic Intersys">
+
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<title>Data-Logic Intersys | Office</title>
+
+	<link href="css/app.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" ng-href="dashboard">
+          <span class="align-middle">{{pageTitle}}</span>
+        </a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Overview
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" ng-href="dashboard">
+              <i class="align-middle" data-feather="home"></i> <span class="align-middle">Dashboard</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						Database
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" ng-href="categories">
+              <i class="align-middle" data-feather="target"></i> <span class="align-middle">Categories</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item active">
+						<a class="sidebar-link" ng-href="everyone">
+              <i class="align-middle" data-feather="database"></i> <span class="align-middle">Everyone</span>
+            </a>
+					</li>
+
+					<!-- <li class="sidebar-header">
+						Events
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" disabled ng-href="add-checker">
+              <i class="align-middle" data-feather="plus-circle"></i> <span class="align-middle">Ticket Checker</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" disabled ng-href="checkers">
+              <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Checkers</span>
+            </a>
+					</li> -->
+
+					<li class="sidebar-header">
+						Office Users
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" ng-href="add-user">
+              <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">New User</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" ng-href="all-users">
+              <i class="align-middle" data-feather="users"></i> <span class="align-middle">Users</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						Personalization
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" ng-href="profile">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" ng-href="notifications">
+              <i class="align-middle" data-feather="bell"></i> <span class="align-middle">Notifications</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" ng-href="settings">
+              <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
+            </a>
+					</li>
+
+				</ul>
+
+				<div class="sidebar-cta">
+					<div class="sidebar-cta-content">
+						<strong class="d-inline-block mb-2">Powered by Xnyder</strong>
+						<div class="mb-3 text-sm">
+
+						</div>
+						<a href="https://xnyder.co" target="_blank" class="btn btn-primary btn-block">Visit us</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle d-flex">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-toggle="dropdown">
+								<div class="position-relative">
+									<i class="align-middle" data-feather="bell"></i>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right py-0" aria-labelledby="alertsDropdown">
+								<div class="dropdown-menu-header">
+									Notifications
+								</div>
+								<div class="list-group">
+									<a href="" ng-if="allNotifications != 'no data'" ng-repeat="notification in allNotifications" class="list-group-item">
+										<div class="row no-gutters align-items-center">
+											<div class="col-2">
+												<i ng-if="notification.type == 'Login Activity'" class="text-primary" data-feather="log-in"></i>
+												<i ng-if="notification.type == 'Logout Activity'" class="text-danger" data-feather="log-out"></i>
+												<i ng-if="notification.type == 'Add Activity'" class="text-success" data-feather="check-circle"></i>
+												<i ng-if="notification.type == 'Delete Activity'" class="text-danger" data-feather="trash-2"></i>
+												<i ng-if="notification.type == 'Edit Activity'" class="text-primary" data-feather="edit-3"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark" ng-if="notification.type == 'Login Activity'">{{notification.type}}</div>
+												<div class="text-dark" ng-if="notification.type == 'Logout Activity'">{{notification.type}}</div>
+												<div class="text-dark" ng-if="(notification.type != 'Login Activity') && (notification.type != 'Logout Activity')">Action Performed</div>
+												<div class="text-muted small mt-1">{{notification.action}}</div>
+												<div class="text-muted small mt-1">{{notification.added_date | fil_date | date}} @ {{notification.added_date | fil_time | fil_fmt_time}}</div>
+											</div>
+										</div>
+									</a>
+									<a href="" ng-if="allNotifications == 'no data'" class="list-group-item">
+										<div class="row no-gutters align-items-center">
+											<div class="col-2">
+												<i class="text-primary" data-feather="bell-off"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">No notifications</div>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div class="dropdown-menu-footer">
+									<a ng-href="notifications" class="text-muted">Show all notifications</a>
+								</div>
+							</div>
+						</li>
+
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
+                <img ng-src="{{loggedInUserImage}}" class="avatar img-fluid rounded mr-1" alt="{{loggedInName}}" /> <span class="text-dark">{{loggedInName}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" ng-href="profile"><i class="align-middle mr-1" data-feather="user"></i> Profile</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" ng-href="settings"><i class="align-middle mr-1" data-feather="settings"></i> Settings</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" ng-click="doLogout()">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="row mb-2 mb-xl-3">
+						<div class="col-auto d-none d-sm-block">
+							<h1 class="h3 mb-3">{{pageTitle}}</h1>
+						</div>
+
+						<div class="col-auto ml-auto text-right mt-n1">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
+									<li class="breadcrumb-item"><a ng-href="categories">Categories</a></li>
+									<li class="breadcrumb-item active" aria-current="page">{{pageTitle}}</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card" ng-if="show_loader">
+								<div class="card-header">
+									<h5 class="card-title mb-0"></h5>
+								</div>
+								<div class="card-body">
+									<div class="mb-2 text-center">
+										<div class="spinner-grow spinner-grow-lg text-danger mr-2 " role="status">
+											<span class="sr-only">Loading red...</span>
+										</div>
+										<div class="spinner-grow spinner-grow-lg text-warning mr-2 " role="status">
+											<span class="sr-only">Loading yellow...</span>
+										</div>
+										<div class="spinner-grow spinner-grow-lg text-success mr-2 " role="status">
+											<span class="sr-only">Loading green...</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="card" ng-if="show_loader == undefined && (main_role != 5 && main_role != 6 && main_role != 7 && main_role != 8)">
+								<div class="card-header">
+									<h5 class="card-title mb-0"></h5>
+								</div>
+								<div class="card-body">
+
+									<div class="row">
+                    <div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterShow == false" ng-click="filterByDate()"><i class="fa fa-filter"></i> Date</button>
+                    </div>
+										<div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterCategoryShow == false" ng-click="filterByCategory()"><i class="fa fa-filter"></i> Category</button>
+                    </div>
+										<div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterNationShow == false" ng-click="filterByNation()"><i class="fa fa-filter"></i> Nation</button>
+                    </div>
+										<div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterStateShow == false" ng-click="filterByState()"><i class="fa fa-filter"></i> State</button>
+                    </div>
+										<div class="col-12 btn-group btn-group-lg mb-3 d-md-none d-lg-none d-xl-none" role="group" aria-label="Large button group">
+											<button type="button" class="btn btn-primary"  ng-if="filterShow == false" ng-click="filterByDate()"><i class="fa fa-filter"></i> Date</button>
+											<button type="button" class="btn btn-primary"  ng-if="filterCategoryShow == false" ng-click="filterByCategory()"><i class="fa fa-filter"></i> Category</button>
+											<button type="button" class="btn btn-primary"  ng-if="filterNationShow == false" ng-click="filterByNation()"><i class="fa fa-filter"></i> Nation</button>
+											<button type="button" class="btn btn-primary"  ng-if="filterStateShow == false" ng-click="filterByState()"><i class="fa fa-filter"></i> State</button>
+										</div>
+                  </div>
+
+									<div class="row mt-3">
+                    <div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterAreaShow == false" ng-click="filterByArea()"><i class="fa fa-filter"></i> Area</button>
+                    </div>
+										<div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterZoneShow == false" ng-click="filterByZone()"><i class="fa fa-filter"></i> Zone</button>
+                    </div>
+										<div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterChoirShow == false" ng-click="filterByChoir()"><i class="fa fa-filter"></i> Choir</button>
+                    </div>
+										<div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterPartShow == false" ng-click="filterByPart()"><i class="fa fa-filter"></i> Part</button>
+                    </div>
+										<div class="col-12 btn-group btn-group-lg mb-3 d-md-none d-lg-none d-xl-none" role="group" aria-label="Large button group">
+											<button type="button" class="btn btn-primary"  ng-if="filterAreaShow == false" ng-click="filterByArea()"><i class="fa fa-filter"></i> Area</button>
+											<button type="button" class="btn btn-primary"  ng-if="filterZoneShow == false" ng-click="filterByZone()"><i class="fa fa-filter"></i> Zone</button>
+											<button type="button" class="btn btn-primary"  ng-if="filterChoirShow == false" ng-click="filterByChoir()"><i class="fa fa-filter"></i> Choir</button>
+											<button type="button" class="btn btn-primary"  ng-if="filterPartShow == false" ng-click="filterByPart()"><i class="fa fa-filter"></i> Part</button>
+										</div>
+                  </div>
+
+									<div class="row mt-3">
+										<div class="col-6 d-md-none d-lg-none d-xl-none">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterAllShow == false" ng-click="filterByAll()"><i class="fa fa-filter"></i> All</button>
+                    </div>
+										<div class="col-6 d-md-none d-lg-none d-xl-none">
+                      <button type="button" class="btn btn-danger btn-block"  ng-if="unauthenticateShow == false" ng-click="unauthenticate()"><i class="fa fa-times"></i> Unauthenticate</button>
+                    </div>
+										<div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-primary btn-block"  ng-if="filterAllShow == false" ng-click="filterByAll()"><i class="fa fa-filter"></i> All</button>
+                    </div>
+										<div class="col-md-6 d-none d-md-block d-lg-block">
+
+										</div>
+										<div class="col-md-3 d-none d-md-block d-lg-block">
+                      <button type="button" class="btn btn-danger btn-block"  ng-if="unauthenticateShow == false" ng-click="unauthenticate()"><i class="fa fa-times"></i> Unauthenticate</button>
+                    </div>
+									</div>
+
+									<div class="row mt-3">
+	                  <div class="col-md-12" ng-if="filterShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterForm" novalidate>
+	                          <div class="row form-group">
+	                            <div class="col-12 col-sm-6">
+	                              <label for="startdate" class=" form-control-label">Start Date</label>
+	                              <input type="date" ng-required="true" name="startdate" ng-model="filter_var.startdate" class="form-control">
+	                              <span class="text-danger" ng-if="filterForm.startdate.$error.required && filterForm.$submitted">Select Start Date</span>
+	                            </div>
+	                            <div class="col-12 col-sm-6">
+	                              <label for="enddate" class=" form-control-label">End Date</label>
+	                              <input type="date" ng-required="true" name="enddate" ng-model="filter_var.enddate" class="form-control">
+	                              <span class="text-danger" ng-if="filterForm.enddate.$error.required && filterForm.$submitted">Select End Date</span>
+	                            </div>
+	                            <div class="col-12 col-sm-6 mt-3">
+	                              <span class="text-danger" ng-if="filter_var.startdate > filter_var.enddate && filterForm.$submitted">Invalid Range</span>
+	                            </div>
+	                          </div>
+	                          <button type="submit" ng-click="filterForm.$valid && filter()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="filterCategoryShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter By Category Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterCategoryForm" novalidate>
+	                          <div class="row form-group">
+	                            <div class="col-12 col-sm-12">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="filter_category_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterCategoryForm.category.$error.required && filterCategoryForm.$submitted">Select Category</span>
+	                            </div>
+	                          </div>
+	                          <button type="submit" ng-click="filterCategoryForm.$valid && filter_category()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="filterNationShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter By Nation Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterNationForm" novalidate>
+	                          <div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="filter_nation_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterNationForm.category.$error.required && filterNationForm.$submitted">Select Category</span>
+	                            </div>
+	                            <div class="col-12 col-md-6">
+	                              <label for="nation" class=" form-control-label">Nation</label>
+																<select name="nation" ng-model="filter_nation_var.nation" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Nation--</option>
+					                        <option ng-repeat="nation in nations" value="{{nation}}">{{nation}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterNationForm.nation.$error.required && filterNationForm.$submitted">Select Nation</span>
+	                            </div>
+	                          </div>
+	                          <button type="submit" ng-click="filterNationForm.$valid && filter_nation()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="filterStateShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter By State Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterStateForm" novalidate>
+	                          <div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="filter_state_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterStateForm.category.$error.required && filterStateForm.$submitted">Select Category</span>
+	                            </div>
+	                            <div class="col-12 col-md-6">
+	                              <label for="nation" class=" form-control-label">Nation</label>
+																<select name="nation" ng-model="filter_state_var.nation" ng-change="change_state(filter_state_var.nation)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Nation--</option>
+					                        <option ng-repeat="nation in nations" value="{{nation}}">{{nation}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterStateForm.nation.$error.required && filterStateForm.$submitted">Select Nation</span>
+	                            </div>
+	                          </div>
+														<div class="row form-group">
+															<div class="col-12 col-md-12">
+	                              <label for="state" class=" form-control-label">State</label>
+																<select name="state" ng-model="filter_state_var.state" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select State--</option>
+					                        <option ng-repeat="state in states" value="{{state}}">{{state}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterStateForm.state.$error.required && filterStateForm.$submitted">Select State</span>
+	                            </div>
+														</div>
+	                          <button type="submit" ng-click="filterStateForm.$valid && filter_state()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="filterAreaShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter By Area Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterAreaForm" novalidate>
+	                          <div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="filter_area_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAreaForm.category.$error.required && filterAreaForm.$submitted">Select Category</span>
+	                            </div>
+	                            <div class="col-12 col-md-6">
+	                              <label for="nation" class=" form-control-label">Nation</label>
+																<select name="nation" ng-model="filter_area_var.nation" ng-change="change_state(filter_area_var.nation)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Nation--</option>
+					                        <option ng-repeat="nation in nations" value="{{nation}}">{{nation}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAreaForm.nation.$error.required && filterAreaForm.$submitted">Select Nation</span>
+	                            </div>
+	                          </div>
+														<div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="state" class=" form-control-label">State</label>
+																<select name="state" ng-model="filter_area_var.state" ng-change="change_area(filter_area_var.state)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select State--</option>
+					                        <option ng-repeat="state in states" value="{{state}}">{{state}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAreaForm.state.$error.required && filterAreaForm.$submitted">Select State</span>
+	                            </div>
+															<div class="col-12 col-md-6">
+	                              <label for="area" class=" form-control-label">Area</label>
+																<select name="area" ng-model="filter_area_var.area" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Area--</option>
+					                        <option ng-repeat="area in areas" value="{{area}}">{{area}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAreaForm.area.$error.required && filterAreaForm.$submitted">Select Area</span>
+	                            </div>
+														</div>
+	                          <button type="submit" ng-click="filterAreaForm.$valid && filter_area()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="filterZoneShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter By Zone Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterZoneForm" novalidate>
+	                          <div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="filter_zone_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterZoneForm.category.$error.required && filterZoneForm.$submitted">Select Category</span>
+	                            </div>
+	                            <div class="col-12 col-md-6">
+	                              <label for="nation" class=" form-control-label">Nation</label>
+																<select name="nation" ng-model="filter_zone_var.nation" ng-change="change_state(filter_zone_var.nation)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Nation--</option>
+					                        <option ng-repeat="nation in nations" value="{{nation}}">{{nation}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterZoneForm.nation.$error.required && filterZoneForm.$submitted">Select Nation</span>
+	                            </div>
+	                          </div>
+														<div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="state" class=" form-control-label">State</label>
+																<select name="state" ng-model="filter_zone_var.state" ng-change="change_area(filter_zone_var.state)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select State--</option>
+					                        <option ng-repeat="state in states" value="{{state}}">{{state}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterZoneForm.state.$error.required && filterZoneForm.$submitted">Select State</span>
+	                            </div>
+															<div class="col-12 col-md-6">
+	                              <label for="area" class=" form-control-label">Area</label>
+																<select name="area" ng-model="filter_zone_var.area" ng-change="change_zone(filter_zone_var.area)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Area--</option>
+					                        <option ng-repeat="area in areas" value="{{area}}">{{area}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterZoneForm.area.$error.required && filterZoneForm.$submitted">Select Area</span>
+	                            </div>
+														</div>
+														<div class="row form-group">
+															<div class="col-12 col-md-12">
+	                              <label for="zone" class=" form-control-label">Zone</label>
+																<select name="zone" ng-model="filter_zone_var.zone" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Zone--</option>
+					                        <option ng-repeat="zone in zones" value="{{zone}}">{{zone}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterZoneForm.zone.$error.required && filterZoneForm.$submitted">Select Zone</span>
+	                            </div>
+														</div>
+	                          <button type="submit" ng-click="filterZoneForm.$valid && filter_zone()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="filterChoirShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter By Choir Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterChoirForm" novalidate>
+	                          <div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="filter_choir_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterChoirForm.category.$error.required && filterChoirForm.$submitted">Select Category</span>
+	                            </div>
+	                            <div class="col-12 col-md-6">
+	                              <label for="nation" class=" form-control-label">Nation</label>
+																<select name="nation" ng-model="filter_choir_var.nation" ng-change="change_state(filter_choir_var.nation)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Nation--</option>
+					                        <option ng-repeat="nation in nations" value="{{nation}}">{{nation}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterChoirForm.nation.$error.required && filterChoirForm.$submitted">Select Nation</span>
+	                            </div>
+	                          </div>
+														<div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="state" class=" form-control-label">State</label>
+																<select name="state" ng-model="filter_choir_var.state" ng-change="change_area(filter_choir_var.state)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select State--</option>
+					                        <option ng-repeat="state in states" value="{{state}}">{{state}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterChoirForm.state.$error.required && filterChoirForm.$submitted">Select State</span>
+	                            </div>
+															<div class="col-12 col-md-6">
+	                              <label for="area" class=" form-control-label">Area</label>
+																<select name="area" ng-model="filter_choir_var.area" ng-change="change_zone(filter_choir_var.area)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Area--</option>
+					                        <option ng-repeat="area in areas" value="{{area}}">{{area}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterChoirForm.area.$error.required && filterChoirForm.$submitted">Select Area</span>
+	                            </div>
+														</div>
+														<div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="zone" class=" form-control-label">Zone</label>
+																<select name="zone" ng-model="filter_choir_var.zone" ng-change="change_choir(filter_choir_var.zone)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Zone--</option>
+					                        <option ng-repeat="zone in zones" value="{{zone}}">{{zone}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterChoirForm.zone.$error.required && filterChoirForm.$submitted">Select Zone</span>
+	                            </div>
+															<div class="col-12 col-md-6">
+	                              <label for="choir" class=" form-control-label">Choir</label>
+																<select name="choir" ng-model="filter_choir_var.choir" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Choir--</option>
+					                        <option ng-repeat="choir in choirs" value="{{choir}}">{{choir}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterChoirForm.choir.$error.required && filterChoirForm.$submitted">Select Choir</span>
+	                            </div>
+														</div>
+	                          <button type="submit" ng-click="filterChoirForm.$valid && filter_choir()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="filterPartShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter By Part Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterPartForm" novalidate>
+	                          <div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="filter_part_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterPartForm.category.$error.required && filterPartForm.$submitted">Select Category</span>
+	                            </div>
+	                            <div class="col-12 col-md-6">
+	                              <label for="part" class=" form-control-label">Part</label>
+																<select name="part" ng-model="filter_part_var.part" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Part--</option>
+																	<option value="Treble">Treble</option>
+					                        <option value="Alto">Alto</option>
+					                        <option value="Tenor">Tenor</option>
+					                        <option value="Bass">Bass</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterPartForm.part.$error.required && filterPartForm.$submitted">Select Part</span>
+	                            </div>
+	                          </div>
+	                          <button type="submit" ng-click="filterPartForm.$valid && filter_part()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="filterAllShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-primary">
+	                        <strong class="card-title text-light">Filter By All Information</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="filterAllForm" novalidate>
+	                          <div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="filter_all_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAllForm.category.$error.required && filterAllForm.$submitted">Select Category</span>
+	                            </div>
+	                            <div class="col-12 col-md-6">
+	                              <label for="nation" class=" form-control-label">Nation</label>
+																<select name="nation" ng-model="filter_all_var.nation" ng-change="change_state(filter_all_var.nation)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Nation--</option>
+					                        <option ng-repeat="nation in nations" value="{{nation}}">{{nation}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAllForm.nation.$error.required && filterAllForm.$submitted">Select Nation</span>
+	                            </div>
+	                          </div>
+														<div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="state" class=" form-control-label">State</label>
+																<select name="state" ng-model="filter_all_var.state" ng-change="change_area(filter_all_var.state)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select State--</option>
+					                        <option ng-repeat="state in states" value="{{state}}">{{state}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAllForm.state.$error.required && filterAllForm.$submitted">Select State</span>
+	                            </div>
+															<div class="col-12 col-md-6">
+	                              <label for="area" class=" form-control-label">Area</label>
+																<select name="area" ng-model="filter_all_var.area" ng-change="change_zone(filter_all_var.area)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Area--</option>
+					                        <option ng-repeat="area in areas" value="{{area}}">{{area}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAllForm.area.$error.required && filterAllForm.$submitted">Select Area</span>
+	                            </div>
+														</div>
+														<div class="row form-group">
+															<div class="col-12 col-md-6">
+	                              <label for="zone" class=" form-control-label">Zone</label>
+																<select name="zone" ng-model="filter_all_var.zone" ng-change="change_choir(filter_all_var.zone)" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Zone--</option>
+					                        <option ng-repeat="zone in zones" value="{{zone}}">{{zone}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAllForm.zone.$error.required && filterAllForm.$submitted">Select Zone</span>
+	                            </div>
+															<div class="col-12 col-md-6">
+	                              <label for="choir" class=" form-control-label">Choir</label>
+																<select name="choir" ng-model="filter_all_var.choir" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Choir--</option>
+					                        <option ng-repeat="choir in choirs" value="{{choir}}">{{choir}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAllForm.choir.$error.required && filterAllForm.$submitted">Select Choir</span>
+	                            </div>
+														</div>
+														<div class="row form-group">
+															<div class="col-12 col-md-12">
+	                              <label for="part" class=" form-control-label">Part</label>
+																<select name="part" ng-model="filter_all_var.part" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Part--</option>
+																	<option value="Treble">Treble</option>
+					                        <option value="Alto">Alto</option>
+					                        <option value="Tenor">Tenor</option>
+					                        <option value="Bass">Bass</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="filterAllForm.part.$error.required && filterAllForm.$submitted">Select Part</span>
+	                            </div>
+														</div>
+	                          <button type="submit" ng-click="filterAllForm.$valid && filter_all()" class="btn btn-success mt-3">
+	                            Filter <i class="fa fa-filter"></i>
+	                          </button>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+										<div class="col-md-12" ng-if="unauthenticateShow == true">
+	                    <div class="card">
+	                      <div class="card-header bg-danger">
+	                        <strong class="card-title text-light">Unauthenticate By Category</strong>
+	                      </div>
+	                      <div class="card-body card-block">
+	                        <form name="unauthenticateForm" novalidate>
+	                          <div class="row form-group">
+	                            <div class="col-12 col-sm-12">
+	                              <label for="category" class=" form-control-label">Category</label>
+																<select name="category" ng-model="unauthenticate_var.category" ng-required="true" class="form-control">
+					                        <option value="" disabled selected>--Select Category--</option>
+					                        <option ng-repeat="category in allCategories" value="{{category.uuid}}">{{category.category}}</option>
+					                      </select>
+	                              <span class="text-danger" ng-if="unauthenticateForm.category.$error.required && unauthenticateForm.$submitted">Select Category</span>
+	                            </div>
+	                          </div>
+	                          <button type="submit" ng-if="shouldIShow == false || shouldIShow == undefined" ng-click="unauthenticateForm.$valid && proceed_unauthentication()" class="btn btn-success mt-3">
+	                            Proceed <i class="fa fa-check"></i>
+	                          </button>
+														<div class="row form-group" ng-if="shouldIShow">
+		                          <form name="complete_action_form" novalidate>
+		                            <label class="form-control-label col-12">Are you sure you want to complete this action ?</label>
+		                            <div class="col-6 col-sm-6">
+		                              <button type="button" ng-click="continue_action()" ng-disabled="clickOnce" class="btn btn-success btn-block">
+		                                Yes <i class="fa fa-check"></i>
+		                              </button>
+		                            </div>
+		                            <div class="col-6 col-sm-6">
+		                              <button type="button" ng-click="removeConfirmModal()" ng-disabled="clickOnce" class="btn btn-danger btn-block close-modal">
+		                                No <i class="fa fa-times"></i>
+		                              </button>
+		                            </div>
+		                          </form>
+		                        </div>
+														<div class="alert alert-danger alert-dismissible mt-3" role="alert" ng-if="showStatus">
+															<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button> -->
+															<div class="alert-icon">
+																<i class="far fa-fw fa-bell"></i>
+															</div>
+															<div class="alert-message">
+																<strong>Error</strong> {{showStatus}}
+															</div>
+														</div>
+														<div class="alert alert-success alert-dismissible mt-3" role="alert" ng-if="showSuccessStatus">
+															<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button> -->
+															<div class="alert-icon">
+																<i class="far fa-fw fa-bell"></i>
+															</div>
+															<div class="alert-message">
+																<strong>Success</strong> {{showSuccessStatus}}
+															</div>
+														</div>
+		                      </form>
+	                        </form>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+
+									<div class="row mt-3">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input type="text" name="search" ng-disabled="everyone == null" ng-model="search" placeholder="Search all records ..." class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+									<div class="row mt-3">
+                      <div class="col-12 d-none d-md-block d-lg-block">
+                          <!-- DATA TABLE-->
+                          <div class="table-responsive table--no-card mb-4" ng-if="everyoneStatus == undefined">
+                              <table class="table table-borderless table-striped">
+                                  <thead>
+                                      <tr>
+																				<th title="S/N">S/N</th>
+																				<th title="Category">Category</th>
+																				<th title="Serial">Serial</th>
+																				<th title="Code">Code</th>
+																				<th title="Fullname">Fullname</th>
+																				<th title="Email">Email</th>
+																				<th title="Phone Number">Phone Number</th>
+																				<th title="Gender">Gender</th>
+																				<th title="Part">Part</th>
+																				<th title="Choir">Choir</th>
+																				<th title="Zone">Zone</th>
+																				<th title="Area">Area</th>
+																				<th title="State">State</th>
+																				<th title="Nation">Nation</th>
+																				<th title="Authenticated">Authenticated</th>
+																				<th title="Date Created">Date_Created</th>
+																				<th title="Last Modified">Last_Modified</th>
+																				<th title="Action" ng-if="main_role == 1 || main_role == 2">Action</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr ng-repeat="someone in everyone | limitTo:numLimit:start | filter: search">
+																				<td>#{{$index + 1 | number}}</td>
+                                        <td>{{someone.category}}</td>
+																				<td>{{someone.serial_number}}</td>
+																				<td>{{someone.code}}</td>
+																				<td>{{someone.firstname + (someone.middlename != null ? " " + someone.middlename + " " : " ") + someone.lastname}}</td>
+                                        <td>{{someone.email}}</td>
+																				<td>{{someone.phone_number}}</td>
+																				<td>{{someone.gender}}</td>
+                                        <td>{{someone.part}}</td>
+																				<td>{{someone.choir}}</td>
+																				<td>{{someone.zone}}</td>
+																				<td>{{someone.area}}</td>
+																				<td>{{someone.state}}</td>
+																				<td>{{someone.nation}}</td>
+																				<td ng-if="someone.authenticated == 1"><span class="badge badge-pill badge-success shift-small">Yes</span></td>
+																				<td ng-if="someone.authenticated == 0"><span class="badge badge-pill badge-danger shift-small">No</span></td>
+                                        <td>{{someone.added_date | fil_date | date}} @ {{someone.added_date | fil_time | fil_fmt_time}}</td>
+                                        <td>{{someone.last_modified | fil_date | date}} @ {{someone.last_modified | fil_time | fil_fmt_time}}</td>
+                                        <td class="table-action">
+																					<a title="View" class="btn btn-outline-primary" ng-show="main_role == 1 || main_role == 2 || main_role == 4" ng-click="view_person(someone.uuid, someone.category, someone.stripped, someone.serial_number, someone.code)" style="font-size: 15px;"><i class="far fa-eye"></i></a>
+																					<!-- <a title="Authenticate" class="btn btn-outline-success" ng-show="(main_role == 1 || main_role == 2 || main_role == 4) && someone.authenticated == 0" data-toggle="modal" data-target="#authenticateUserModal" ng-click="authenticate_user(someone.uuid, someone.category, someone.category_uuid, someone.firstname, someone.middlename, someone.lastname, someone.email, someone.phone_number, someone.serial_number, someone.code)" style="font-size: 15px;"><i class="fa fa-check"></i></a> -->
+																					<a title="Delete" class="btn btn-outline-danger" ng-show="main_role == 1 || main_role == 2" data-toggle="modal" data-target="#deleteModal" ng-click="delete_person(someone.uuid, someone.category, someone.serial_number, someone.code)" style="font-size: 15px;"><i class="fas fa-trash"></i></a>
+                                        </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <!-- END DATA TABLE-->
+                      </div>
+
+											<div class="col-12 d-md-none d-lg-none d-xl-none">
+												<div class="card" ng-if="everyoneStatus == undefined" ng-repeat="someone in everyone | limitTo:numLimit:start | filter: search">
+													<div class="card-body">
+
+														<div class="media" >
+
+															<div class="media-body">
+																<small class="float-right text-navy">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-middle"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> {{someone.added_date | fil_date | date}}
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock align-middle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{someone.added_date | fil_time | fil_fmt_time}}
+																</small>
+																<strong>#{{$index + 1 | number}}</strong> <br>
+																<ul class="list-group list-group-flush">
+																	<li class="list-group-item">Category : {{someone.category}}</li>
+																	<li class="list-group-item">Serial : {{someone.serial_number}}</li>
+																	<li class="list-group-item">Code : {{someone.code}}</li>
+																	<li class="list-group-item">Fullname : {{someone.firstname + (someone.middlename != null ? " " + someone.middlename + " " : " ") + someone.lastname}}</li>
+																	<li class="list-group-item">Email : {{someone.email}}</li>
+																	<li class="list-group-item">Mobile : {{someone.phone_number}}</li>
+																	<li class="list-group-item">Gender : {{someone.gender}}</li>
+																	<li class="list-group-item">Part : {{someone.part}}</li>
+																	<li class="list-group-item">Choir : {{someone.choir}}</li>
+																	<li class="list-group-item">Zone : {{someone.zone}}</li>
+																	<li class="list-group-item">Area : {{someone.area}}</li>
+																	<li class="list-group-item">State : {{someone.state}}</li>
+																	<li class="list-group-item">Nation : {{someone.nation}}</li>
+																	<li class="list-group-item">Updated -
+																		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-middle"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> {{someone.last_modified | fil_date | date}}
+																		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock align-middle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{someone.last_modified | fil_time | fil_fmt_time }}
+																	</li>
+																	<li class="list-group-item"> Authenticated : <span class="badge badge-pill badge-success" ng-if="someone.authenticated == 1">Yes</span> <span class="badge badge-pill badge-danger" ng-if="someone.authenticated == 0">No</span></li>
+																	<li class="list-group-item" ng-if="main_role == 1 || main_role == 2">
+																		<button title="View" ng-click="view_person(someone.uuid, someone.category, someone.stripped, someone.serial_number, someone.code)" class="btn btn-outline-primary"><i class="far fa-eye"></i></button>
+																		<!-- <button title="Authenticate" data-toggle="modal" data-target="#authenticateUserModal" ng-show="(main_role == 1 || main_role == 2 || main_role == 4) && someone.authenticated == 0" ng-click="authenticate_user(someone.uuid, someone.category, someone.category_uuid, someone.firstname, someone.middlename, someone.lastname, someone.email, someone.phone_number, someone.serial_number, someone.code)" class="btn btn-outline-success"><i class="fa fa-check"></i></button> -->
+																		<button title="Delete" ng-show="main_role == 1 || main_role == 2" ng-click="delete_person(someone.uuid, someone.category, someone.serial_number, someone.code)" data-toggle="modal" data-target="#deleteModal" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+                  </div>
+
+									<nav aria-label="" class="mt-3 text-center" ng-if="everyoneStatus == undefined">
+										<ul class="pagination pagination-lg">
+											<li class="page-item"><a class="page-link" title="Previous Page" style="cursor: pointer;" ng-hide="hidePrev()" ng-click="PrevPage()"><i class="fas fa-angle-left"></i></a></li>
+											<li class="page-item active"><a class="page-link" title="Current Page">{{currentPage}}</a></li>
+											<li class="page-item"><a class="page-link">...</a></li>
+											<li class="page-item"><a class="page-link" title="Total Number Of Pages">{{pages}}</a></li>
+											<li class="page-item"><a class="page-link" title="Next Page" style="cursor: pointer;" ng-hide="hideNext()" ng-click="nextPage()"><i class="fas fa-angle-right"></i></a></li>
+										</ul>
+									</nav>
+
+									<div class="alert alert-danger alert-dismissible mt-3" role="alert" ng-if="everyoneStatus != undefined">
+										<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button> -->
+										<div class="alert-icon">
+											<i class="far fa-fw fa-bell"></i>
+										</div>
+										<div class="alert-message">
+											<strong>Error</strong> {{everyoneStatus}}
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="card" ng-if="show_loader == undefined && (main_role == 5 || main_role == 6 || main_role == 7 || main_role == 8)">
+								<div class="card-header bg-danger">
+									<h5 class="card-title mb-0 text-light">Unauthorized access</h5>
+								</div>
+								<div class="card-body bg-danger">
+									<blockquote class="blockquote mb-0">
+	                  <p class="text-light">You do not have access to this data</p>
+                    <footer class="blockquote-footer text-light">Error
+                      <cite title="Error">Occured</cite>
+                    </footer>
+                  </blockquote>
+
+								</div>
+							</div>
+
+							<div class="modal fade" id="authenticateUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Authentication Confirmation</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body m-3">
+											<p class="mb-0">Are you sure you want to complete this action ?</p>
+											<div class="alert alert-danger alert-dismissible mt-3" role="alert" ng-if="showStatus">
+												<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button> -->
+												<div class="alert-icon">
+													<i class="far fa-fw fa-bell"></i>
+												</div>
+												<div class="alert-message">
+													<strong>Error</strong> {{showStatus}}
+												</div>
+											</div>
+											<div class="alert alert-success alert-dismissible mt-3" role="alert" ng-if="showSuccessStatus">
+												<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button> -->
+												<div class="alert-icon">
+													<i class="far fa-fw fa-bell"></i>
+												</div>
+												<div class="alert-message">
+													<strong>Success</strong> {{showSuccessStatus}}
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="button" ng-click="continue_action()" class="btn btn-success">Authenticate</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Delete Confirmation</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body m-3">
+											<p class="mb-0">Are you sure you want to complete this action ?</p>
+											<div class="alert alert-danger alert-dismissible mt-3" role="alert" ng-if="showStatus">
+												<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button> -->
+												<div class="alert-icon">
+													<i class="far fa-fw fa-bell"></i>
+												</div>
+												<div class="alert-message">
+													<strong>Error</strong> {{actionStatus}}
+												</div>
+											</div>
+											<div class="alert alert-success alert-dismissible mt-3" role="alert" ng-if="showSuccessStatus">
+												<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button> -->
+												<div class="alert-icon">
+													<i class="far fa-fw fa-bell"></i>
+												</div>
+												<div class="alert-message">
+													<strong>Success</strong> {{actionStatus}}
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="button" ng-click="continue_action()" class="btn btn-danger">Delete</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-left">
+							<p class="mb-0">
+								<a href="" class="text-muted"><strong>Data-Logic Intersys</strong></a> &copy;
+							</p>
+						</div>
+						<div class="col-6 text-right">
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://xnyder.co">Support</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="js/vendor.js"></script>
+	<script src="js/app.js"></script>
+
+</body>
+
+</html>
