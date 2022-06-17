@@ -36,7 +36,7 @@ chuks_project_signup.controller('profileCtrl',function($scope,$rootScope,$http,$
             $scope.categoryPerson = response.data.re_data;
             $rootScope.pageTitle = $scope.categoryPerson.firstname + ($scope.categoryPerson.middlename != null ? " " + $scope.categoryPerson.middlename + " " : " ") + $scope.categoryPerson.lastname + " - " + $scope.categoryPerson.category;
             $scope.fullname = $scope.categoryPerson.firstname + ($scope.categoryPerson.middlename != null ? " " + $scope.categoryPerson.middlename + " " : " ") + $scope.categoryPerson.lastname;
-            $scope.qr_code = "https://intersys.toonlogicstudio.com/" + $routeParams.category + "/signup?code=" + $scope.categoryPerson.code;
+            $scope.qr_code = "https://datalogic.toonlogicstudio.com/" + $routeParams.category + "/signup?code=" + $scope.categoryPerson.code;
 
             $scope.remove_loader();
 
