@@ -1,11 +1,5 @@
 <?php
 
-  // $servername = "localhost";
-  // $dbname = "emmyplik_hbw";
-  // $username = "emmyplik_dev";
-  // $password = "Nigga144Dev";
-  // $connected = false;
-
   $servername = "localhost";
   $dbname = "chuks_project";
   $username = "root";
