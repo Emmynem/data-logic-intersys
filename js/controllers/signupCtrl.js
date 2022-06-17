@@ -240,7 +240,7 @@ chuks_project_signup.controller('signupCtrl',function($scope,$rootScope,$http,$t
                       $scope.fullname = $scope.user.firstname + ($scope.user.middlename != null ? " " + $scope.user.middlename + " " : " ") + $scope.user.lastname;
                       $scope.email_subject = "Receipt for " + $scope.category.category;
                       $scope.description = "Thank you for signing up for" + $scope.category.category + " event . <br>Here's your unique qr code pass for this event. Don't delete this mail, it'll be used to identify you in the event.<br><h3>Thanks for using our platform <a href='https://www.toonlogicstudio.com/'>Data-Logic Intersys - Toon Logic Studio</a></h3>";
-                      $scope.qr_code = "https://intersys.toonlogicstudio.com/" + $scope.category.stripped + "/signup?code=" + $scope.user.code;
+                      $scope.qr_code = "https://datalogic.toonlogicstudio.com/" + $scope.category.stripped + "/signup?code=" + $scope.user.code;
 
                       $scope.requestData = {
                         "fullname":$scope.fullname,
