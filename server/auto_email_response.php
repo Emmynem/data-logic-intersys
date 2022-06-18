@@ -67,15 +67,15 @@ try {
     //Server settings
 		$mail->SMTPDebug = 2;                      // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = '';                    // Set the SMTP server to send through
+    $mail->Host       = 'toonlogicstudio.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = '';                     // SMTP username
-    $mail->Password   = '';                               // SMTP password
+    $mail->Username   = 'noreply@toonlogicstudio.com';                     // SMTP username
+    $mail->Password   = 't3pL6i2gUn1ms';                               // SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
     $mail->Port       = 465;                                  // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('', '');
+    $mail->setFrom('noreply@toonlogicstudio.com', 'Toon Logic Studio');
     $mail->addAddress($email, $fullname);     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
