@@ -52,9 +52,9 @@ $message = '
 			<p>'.$the_message.'</p>
 			<img class="" style="min-width: 100%;" src="https://api.qrserver.com/v1/create-qr-code/?size=100%x100&data='.$qr_code.'" alt='.$code.' - QR Code">
 			<br>
-			<p>Sincerely, <br> <span class="xui-text-blue"> <a href="https://www.intersys.toonlogicstudio.com/" style="text-decoration: none;">Data-Logic Intersys</a></span></p>
+			<p>Sincerely, <br> <span class="xui-text-blue"> <a href="https://www.datalogic.toonlogicstudio.com/" style="text-decoration: none;">Data-Logic Intersys</a></span></p>
 
-			<p>Copyright © <script type="text/javascript">document.write(new Date().getFullYear());</script> <a target="_blank" href="https://www.intersys.toonlogicstudio.com/">Data-Logic Intersys</a>. All rights reserved.</p>
+			<p>Copyright © <script type="text/javascript">document.write(new Date().getFullYear());</script> <a target="_blank" href="https://www.datalogic.toonlogicstudio.com/">Data-Logic Intersys</a>. All rights reserved.</p>
 		</div>
 	</section>
 
@@ -67,15 +67,15 @@ try {
     //Server settings
 		$mail->SMTPDebug = 2;                      // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
-    $mail->Host       = 'toonlogicstudio.com';                    // Set the SMTP server to send through
+    $mail->Host       = '';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-    $mail->Username   = 'noreply@toonlogicstudio.com';                     // SMTP username
-    $mail->Password   = 't3pL6i2gUn1ms';                               // SMTP password
+    $mail->Username   = '';                     // SMTP username
+    $mail->Password   = '';                               // SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
     $mail->Port       = 465;                                  // TCP port to connect to
 
     //Recipients
-    $mail->setFrom('noreply@toonlogicstudio.com', 'Toon Logic Studio');
+    $mail->setFrom('', '');
     $mail->addAddress($email, $fullname);     // Add a recipient
     // $mail->addAddress('ellen@example.com');               // Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
