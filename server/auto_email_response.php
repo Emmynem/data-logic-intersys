@@ -52,9 +52,9 @@ $message = '
 			<p>'.$the_message.'</p>
 			<img class="" style="min-width: 100%;" src="https://api.qrserver.com/v1/create-qr-code/?size=100%x100&data='.$qr_code.'" alt='.$code.' - QR Code">
 			<br>
-			<p>Sincerely, <br> <span class="xui-text-blue"> <a href="https://www.intersys.toonlogicstudio.com/" style="text-decoration: none;">Data-Logic Intersys</a></span></p>
+			<p>Sincerely, <br> <span class="xui-text-blue"> <a href="https://www.datalogic.toonlogicstudio.com/" style="text-decoration: none;">Data-Logic Intersys</a></span></p>
 
-			<p>Copyright © <script type="text/javascript">document.write(new Date().getFullYear());</script> <a target="_blank" href="https://www.intersys.toonlogicstudio.com/">Data-Logic Intersys</a>. All rights reserved.</p>
+			<p>Copyright © <script type="text/javascript">document.write(new Date().getFullYear());</script> <a target="_blank" href="https://www.datalogic.toonlogicstudio.com/">Data-Logic Intersys</a>. All rights reserved.</p>
 		</div>
 	</section>
 
