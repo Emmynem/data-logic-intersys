@@ -48,11 +48,10 @@
         $query3->execute();
 
         if ($query3->rowCount() > 0) {
-          $sql4 = "SELECT category FROM people WHERE category=:category AND (email=:email OR phone_number=:phone_number) AND status=:status ORDER BY added_date DESC LIMIT 1";
+          $sql4 = "SELECT category FROM people WHERE category=:category AND (email=:email AND email IS NOT NULL) AND status=:status ORDER BY added_date DESC LIMIT 1";
           $query4 = $conn->prepare($sql4);
           $query4->bindParam(":category", $data['category']);
           $query4->bindParam(":email", $data['email']);
-          $query4->bindParam(":phone_number", $data['phone_number']);
           $query4->bindParam(":status", $active);
           $query4->execute();
 
@@ -109,11 +108,10 @@
           }
         }
         else {
-          $sql4 = "SELECT category FROM people WHERE category=:category AND (email=:email OR phone_number=:phone_number) AND status=:status ORDER BY added_date DESC LIMIT 1";
+          $sql4 = "SELECT category FROM people WHERE category=:category AND (email=:email AND email IS NOT NULL) AND status=:status ORDER BY added_date DESC LIMIT 1";
           $query4 = $conn->prepare($sql4);
           $query4->bindParam(":category", $data['category']);
           $query4->bindParam(":email", $data['email']);
-          $query4->bindParam(":phone_number", $data['phone_number']);
           $query4->bindParam(":status", $active);
           $query4->execute();
 
@@ -170,11 +168,10 @@
       }
       else {
 
-        $sql4 = "SELECT category FROM people WHERE category=:category AND (email=:email OR phone_number=:phone_number) AND status=:status ORDER BY added_date DESC LIMIT 1";
+        $sql4 = "SELECT category FROM people WHERE category=:category AND (email=:email AND email IS NOT NULL) AND status=:status ORDER BY added_date DESC LIMIT 1";
         $query4 = $conn->prepare($sql4);
         $query4->bindParam(":category", $data['category']);
         $query4->bindParam(":email", $data['email']);
-        $query4->bindParam(":phone_number", $data['phone_number']);
         $query4->bindParam(":status", $active);
         $query4->execute();
 

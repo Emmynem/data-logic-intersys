@@ -231,6 +231,8 @@ chuks_project_signup.controller('signupCtrl',function($scope,$rootScope,$http,$t
                   $scope.user.file_size = $rootScope.signup_image_file_size;
                   $scope.user.path_to_delete = $rootScope.signup_image;
 
+                  $scope.user.email = $scope.user.email == "" || $scope.user.email == null || $scope.user.email == undefined ? null : $scope.user.email;
+
                   $scope.clickOnce = true;
 
                   $http.post('server/signup.php', $scope.user)

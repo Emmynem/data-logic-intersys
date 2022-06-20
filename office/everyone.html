@@ -829,7 +829,7 @@
 																				<td>{{someone.serial_number}}</td>
 																				<td>{{someone.code}}</td>
 																				<td>{{someone.firstname + (someone.middlename != null ? " " + someone.middlename + " " : " ") + someone.lastname}}</td>
-                                        <td>{{someone.email}}</td>
+                                        <td>{{someone.email == null ? 'None' : someone.email}}</td>
 																				<td>{{someone.phone_number}}</td>
 																				<td>{{someone.gender}}</td>
                                         <td>{{someone.part}}</td>
@@ -871,7 +871,7 @@
 																	<li class="list-group-item">Serial : {{someone.serial_number}}</li>
 																	<li class="list-group-item">Code : {{someone.code}}</li>
 																	<li class="list-group-item">Fullname : {{someone.firstname + (someone.middlename != null ? " " + someone.middlename + " " : " ") + someone.lastname}}</li>
-																	<li class="list-group-item">Email : {{someone.email}}</li>
+																	<li class="list-group-item">Email : {{someone.email == null ? 'None' : someone.email}}</li>
 																	<li class="list-group-item">Mobile : {{someone.phone_number}}</li>
 																	<li class="list-group-item">Gender : {{someone.gender}}</li>
 																	<li class="list-group-item">Part : {{someone.part}}</li>

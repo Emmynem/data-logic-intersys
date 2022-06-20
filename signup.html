@@ -73,7 +73,7 @@
                   <div class="row form-group">
                     <div class="col-12 col-md-12">
                       <label for="email" class=" form-control-label">Email</label>
-                      <input type="email" name="email" ng-model="user.email" ng-disabled="shouldIShow" ng-required="true" ng-minlength = "3" ng-maxlength = "149" ng-pattern="/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/" placeholder="e.g. example@domain.com" class="form-control p_input">
+                      <input type="email" name="email" ng-model="user.email" ng-disabled="shouldIShow" ng-required="false" ng-minlength = "3" ng-maxlength = "149" ng-pattern="/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/" placeholder="e.g. example@domain.com" class="form-control p_input">
                       <div class="d-flex flex-row align-items-center" ng-if="signupForm.email.$error.required && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Enter Email </p></div>
                       <div class="d-flex flex-row align-items-center" ng-if="signupForm.email.$error.pattern && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Valid Email Addresses Only </p></div>
                       <div class="d-flex flex-row align-items-center" ng-if="signupForm.email.$error.minlength && signupForm.$submitted"><i class="mdi mdi-information icon-sm text-danger"></i><p class="mb-0 ml-1"> Minimum length is 3 characters </p></div>
