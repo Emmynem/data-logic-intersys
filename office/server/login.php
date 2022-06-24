@@ -59,10 +59,10 @@
 
         $flight_3 = $query6->fetch();
 
-        $fullName = $flight_3[0];
-        $yourEmail = $flight_3[1];
-        $userrole = $flight_3[2];
-        $yourUsername = $flight_3[3];
+        $fullName = !$flight_3 ? null : $flight_3[0];
+        $yourEmail = !$flight_3 ? null : $flight_3[1];
+        $userrole = !$flight_3 ? null : $flight_3[2];
+        $yourUsername = !$flight_3 ? null : $flight_3[3];
 
         if (password_verify($password_now, $password_check)) {
           $returnvalue = new loginClass();
