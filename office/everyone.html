@@ -868,22 +868,9 @@
 																<strong>#{{$index + 1 | number}}</strong> <br>
 																<ul class="list-group list-group-flush">
 																	<li class="list-group-item">Category : {{someone.category}}</li>
-																	<li class="list-group-item">Serial : {{someone.serial_number}}</li>
 																	<li class="list-group-item">Code : {{someone.code}}</li>
 																	<li class="list-group-item">Fullname : {{someone.firstname + (someone.middlename != null ? " " + someone.middlename + " " : " ") + someone.lastname}}</li>
-																	<li class="list-group-item">Email : {{someone.email == null ? 'None' : someone.email}}</li>
-																	<li class="list-group-item">Mobile : {{someone.phone_number}}</li>
 																	<li class="list-group-item">Gender : {{someone.gender}}</li>
-																	<li class="list-group-item">Part : {{someone.part}}</li>
-																	<li class="list-group-item">Choir : {{someone.choir}}</li>
-																	<li class="list-group-item">Zone : {{someone.zone}}</li>
-																	<li class="list-group-item">Area : {{someone.area}}</li>
-																	<li class="list-group-item">State : {{someone.state}}</li>
-																	<li class="list-group-item">Nation : {{someone.nation}}</li>
-																	<li class="list-group-item">Updated -
-																		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-middle"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> {{someone.last_modified | fil_date | date}}
-																		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock align-middle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{someone.last_modified | fil_time | fil_fmt_time }}
-																	</li>
 																	<li class="list-group-item"> Authenticated : <span class="badge badge-pill badge-success" ng-if="someone.authenticated == 1">Yes</span> <span class="badge badge-pill badge-danger" ng-if="someone.authenticated == 0">No</span></li>
 																	<li class="list-group-item" ng-if="main_role == 1 || main_role == 2">
 																		<button title="View" ng-click="view_person(someone.uuid, someone.category, someone.stripped, someone.serial_number, someone.code)" class="btn btn-outline-primary"><i class="far fa-eye"></i></button>
