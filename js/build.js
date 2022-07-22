@@ -1335,11 +1335,14 @@ chuks_project_signup.service('cncf_bethels', function () {
         "Bomu Bethel"
       ],
       "Eleme Zone": [
-        "Ebubu Bethel",
         "Agbonchia Bethel",
-        "Onne Bethel",
         "Alesa Bethel",
-        "Aleto Bethel"
+        "Aleto Bethel",
+        "Ebubu Central Bethel",
+        "Ebubu Unity Bethel",
+        "Eteo Supreme Bethel",
+        "Onne Central Bethel",
+        "Onne Seaport Bethel"
       ],
       "Tai Zone": [
         "Sime Bethel",
@@ -1350,7 +1353,7 @@ chuks_project_signup.service('cncf_bethels', function () {
       ],
       "Abonnema Zone": [
         "Abonnema Bethel",
-        "Idama Bethel"
+        "Soku Bethel"
       ],
       "Buguma Zone": [
         "Buguma Bethel"
@@ -1366,11 +1369,14 @@ chuks_project_signup.service('cncf_bethels', function () {
       ],
       "Presidential Zone": [
         "Presidential Bethel",
-        "Presidential Bethel",
+        "Rumueprikom Bethel",
         "Testimony Bethel",
         "Rumueme Bethel",
         "Choba Bethel",
-        "Rumualogu Bethel"
+        "Rumualogu Bethel",
+        "Crystal Avenue Bethel",
+        "Oginigba Bethel",
+        "Aluu Umoku Bethel"
       ],
       "Eneka Zone": [
         "Eneka Bethel",
@@ -1527,11 +1533,14 @@ chuks_project_signup.service('cncf_choirs', function () {
         "Bomu Bethel Choir"
       ],
       "Eleme Zone": [
-        "Ebubu Bethel Choir",
         "Agbonchia Bethel Choir",
-        "Onne Bethel Choir",
         "Alesa Bethel Choir",
-        "Aleto Bethel Choir"
+        "Aleto Bethel Choir",
+        "Ebubu Central Bethel Choir",
+        "Ebubu Unity Bethel Choir",
+        "Eteo Supreme Bethel Choir",
+        "Onne Central Bethel Choir",
+        "Onne Seaport Bethel Choir"
       ],
       "Tai Zone": [
         "Sime Bethel Choir",
@@ -1542,7 +1551,7 @@ chuks_project_signup.service('cncf_choirs', function () {
       ],
       "Abonnema Zone": [
         "Abonnema Bethel Choir",
-        "Idama Bethel Choir"
+        "Soku Bethel Choir"
       ],
       "Buguma Zone": [
         "Buguma Bethel Choir"
@@ -1558,11 +1567,14 @@ chuks_project_signup.service('cncf_choirs', function () {
       ],
       "Presidential Zone": [
         "Presidential Bethel Choir",
-        "Presidential Bethel Choir",
+        "Rumueprikom Bethel Choir",
         "Testimony Bethel Choir",
         "Rumueme Bethel Choir",
         "Choba Bethel Choir",
-        "Rumualogu Bethel Choir"
+        "Rumualogu Bethel Choir",
+        "Crystal Avenue Bethel Choir",
+        "Oginigba Bethel Choir",
+        "Aluu Umoku Bethel Choir"
       ],
       "Eneka Zone": [
         "Eneka Bethel Choir",
