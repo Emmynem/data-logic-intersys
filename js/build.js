@@ -1177,7 +1177,7 @@ chuks_project_signup.service('cncf_areas', function () {
       Rivers: [
         "Port Harcourt Area 1",
         "Port Harcourt Area 2",
-        "Ogoni Area",
+        "Ogoni/Eleme Area",
         "Orashi Area",
         "Andoni Area",
         "Kalabari Area",
@@ -1205,7 +1205,7 @@ chuks_project_signup.service('cncf_zones', function () {
         "Eneka Zone",
         "Oyigbo Zone"
       ],
-      "Ogoni Area": [
+      "Ogoni/Eleme Area": [
         "Khana Zone",
         "Gokana Zone",
         "Eleme Zone",
@@ -1353,7 +1353,8 @@ chuks_project_signup.service('cncf_bethels', function () {
       ],
       "Abonnema Zone": [
         "Abonnema Bethel",
-        "Soku Bethel"
+        "Soku Bethel",
+        "Idama Bethel"
       ],
       "Buguma Zone": [
         "Buguma Bethel"
@@ -1551,7 +1552,8 @@ chuks_project_signup.service('cncf_choirs', function () {
       ],
       "Abonnema Zone": [
         "Abonnema Bethel Choir",
-        "Soku Bethel Choir"
+        "Soku Bethel Choir",
+        "Idama Bethel Choir"
       ],
       "Buguma Zone": [
         "Buguma Bethel Choir"
